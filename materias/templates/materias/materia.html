@@ -1,5 +1,24 @@
-{% extends 'app/base.html' %} {% block content %}
+{% extends 'app/base.html' %}  {% block header%}
+<div class="mt-lg-4 mb-lg-4">
+      <h1>{{materia}}</h1>
+</div>
 
-<h1>{{materia}}</h1>
+{% endblock header %}{% block content %}
 
-{% for comentario in comentarios %} {{ comentario }} {% endfor %} {% endblock %}
+<p>
+     <a href="#" method="post">Excluir matéria{% csrf_token %}</a> | <a href="#">Adicionar novo comentário</a>
+</p>
+
+{% for comentario in comentarios %}
+<div>
+     <div>
+          <h3>{{ comentario.date_added | date:"d F Y, H:i" }}
+               <small>
+                    <a href="#">Editar comentário</a> | <a href="#" method="post">Excluir comentário {% csrf_token %}</a>
+               </small>
+          </h3>
+     </div>
+     <div>{{ comentario.text | linebreaks }}</div>
+</div>
+
+{% empty %} Ainda não há comentários. {% endfor %} {% endblock content%}
