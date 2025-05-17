@@ -1,5 +1,21 @@
-{% extends 'app/base.html' %} {% block content %} {% for materia in materias %}
+{% extends 'app/base.html' %} {% block header %}
+<div class="mb-4">
+      <h1>Matérias:</h1>
+</div>
+{% endblock header %} {% block content %}
+<ul>
+      {% for materia in materias %}
+      <li>
+            <h3>
+                  <a href="{% url 'materia' materia.id %}">{{ materia }}</a>
+            </h3>
+      </li>
+      {% empty %}
+      <li>Não há matérias adicionadas!</li>
+      {% endfor %}
+</ul>
+<h3>
+      <a href="#">Nova matéria</a>
+</h3>
 
-<h1><a href="{% url 'materia' materia.id %}">{{ materia }}</a></h1>
-
-{% endfor %} {% endblock %}
+{% endblock content %}

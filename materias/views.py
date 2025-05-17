@@ -1,23 +1,23 @@
 from django.shortcuts import render
 from app.models import Materia
-from app.forms import MateriaForm
 from django.contrib.auth.decorators import login_required
 
-@login_required
-def materia(request, pk):
-     """View de matérias individuais"""
-     materia = Materia.objects.get(pk = pk)
+@login_required # exige login do usuário para acessar esta aba, no caso as materias
+def materia(request, materia_id):
+    """Página de matéria única"""
+    materia = Materia.objects.get(id = materia_id)
 
-     if materia.user != request.user:
-          return render(request, 'app/erro_404.html', status=404)
-     
-     comentarios = materia.comentario_set.order_by('-date_added') 
-     context = {'materia':materia, 'comentarios':comentarios}
-     return render(request, 'materias/materia.html', context)
+    # garante que a matéria pertença ao usuário atual
+    if materia.user != request.user:
+        return render(request, 'app/erro_404.html', status=404)
+    
+    comentarios = materia.comentario_set.order_by('-date_added') # o "-" é para começar da ordem inversa
+    context = {'materia': materia, 'comentarios': comentarios}
+    return render(request, 'materias/materia.html', context)
 
-@login_required
+@login_required # exige login do usuário para acessar esta aba, no caso as materias
 def materias(request):
-     """View da lista de matérias"""
-     materias = Materia.objects.order_by('date_added') # apaguei isso antes de order_by: .filter(user = request.user)
-     context = {'materias':materias}
-     return render(request, 'materias/materias.html', context)
+    """Página que lista todas as matérias"""
+    materias = Materia.objects.filter(user=request.user).order_by('date_added')
+    context = {'materias': materias}
+    return render(request, 'materias/materias.html', context)
