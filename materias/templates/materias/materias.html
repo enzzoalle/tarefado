@@ -1,0 +1,5 @@
+{% extends 'app/base.html' %} {% block content %} {% for materia in materias %}
+
+<h1><a href="{% url 'materia' materia.id %}">{{ materia }}</a></h1>
+
+{% endfor %} {% endblock %}

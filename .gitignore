@@ -1,0 +1,9 @@
+env/
+.env
+*.sql
+*.sqlite3
+__pycache__/
+*.pyc
+wp.txt
+tutorial.txt
+documentação.txt
