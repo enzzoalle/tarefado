@@ -5,7 +5,13 @@ class MateriaForm(forms.ModelForm):
     class Meta:
         model = Materia
         fields = ['titulo']
-        label = {'titulo':''}
+        labels = {'titulo': ''}
+        widgets = {
+            'titulo': forms.TextInput(attrs={
+                'class':'form-control',
+                'id':'nova_materia'
+            })
+        }
 
 class ComentarioForm(forms.ModelForm):
     class Meta:

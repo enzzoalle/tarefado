@@ -54,4 +54,4 @@ def excluir_materia(request, materia_id):
         return HttpResponseRedirect(reverse('materias'))
     
     context = {'materia':materia}
-    return render (request, 'materias/excluir_matéria.html', context)
+    return render (request, 'materias/excluir_materia.html', context)

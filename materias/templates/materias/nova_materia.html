@@ -1,16 +1,17 @@
 {% extends 'app/base.html' %} {% block header %} {% endblock header %}{% block content %}
 
 <div class="container">
-      <div class="row justify-content-center">
-            <div class="col-md-6">
-                  <h3>Nova matéria:</h3>
-                  <form action="{% url 'nova_materia' %}" method="post" class="form">
-                        {% csrf_token %}{% buttons %}
-                        <button type="submit" class="btn btn-primary">Adicionar</button>
-                        {% endbuttons %}
-                  </form>
-            </div>
+      <div class="col-md-5">
+            <h3 class="mb-lg-3">Nova matéria:</h3>
+            <form action="{% url 'nova_materia' %}" method="post">
+                  {% csrf_token %}
+                  <div class="mb-lg-3">
+                        {{ form.titulo }} {% if form.titulo.errors %}
+                        <div class="text-danger">{{ form.titulo.errors }}</div>
+                        {% endif %}
+                  </div>
+                  <button type="submit" class="btn btn-primary">Adicionar</button>
+            </form>
       </div>
 </div>
-
-{% endblock %}
+{% endblock content %}

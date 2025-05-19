@@ -1,13 +1,12 @@
-{% extends 'app/base.html' %} {% block header %}
+{% extends 'app/base.html' %} {% block content %}
+<div class="container py-5">
+      <h2 class="mb-4">Tem certeza que deseja excluir esta matéria e todos seus comentários?</h2>
 
-<h1 class="mb-1">Tem certeza que deseja excluir esta matéria e todos seus comentários?</h1>
-<h2>"{{ materia }}"</h2>
-{% endblock header %}{% block content %}
+      <h2><p class="fs-20 fw-bold text-white">"{{ materia.titulo }}"</p></h2>
 
-<form action="{% url 'excluir_materia' materia.id %}" method="post">
-      {% csrf_token %} {% buttons %}
-      <button name="excluir" class="btn btn-danger">Sim, excluir matéria</button>
-      {% endbuttons %}
-</form>
-
-{% endblock content%}
+      <form method="post">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger mt-2">Sim, excluir matéria</button>
+      </form>
+</div>
+{% endblock %}
