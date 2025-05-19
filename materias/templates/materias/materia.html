@@ -1,27 +1,31 @@
-{% extends 'app/base.html' %}  {% block header%}
-<div class="mt-lg-4 mb-lg-2">
-      <h1>{{materia}}</h1>
-</div>
+{% extends "app/base.html" %} {% block header %}
 
-{% endblock header %}{% block content %}
+<h1>{{ materia }}</h1>
 
-<p>
-      <a href="{% url 'excluir_materia' materia.id %}" method="post" style="display:inline">Excluir matéria
-            {% csrf_token %}
-      </a> | 
-      <a href="{% url 'novo_comentario' materia.id%}">Adicionar novo comentário</a>
+{% endblock header %} {% block content %}
+
+<p class="mb-4">
+      <a href="{% url 'excluir_materia' materia.id %}" method="post" class="text-decoration-none">Excluir matéria {% csrf_token %}</a>
+      |
+      <a href="{% url 'novo_comentario' materia.id%}" class="text-decoration-none">Adicionar novo comentário</a>
 </p>
 
 {% for comentario in comentarios %}
-<div>
-     <div>
-          <h3>{{ comentario.date_added | date:"d F Y, H:i" }}
-               <small>
-                    <a href="{% url 'editar_comentario' comentario.id %}">Editar comentário</a> | <a href="{% url 'excluir_comentario' comentario.id %}" method="post">Excluir comentário {% csrf_token %}</a>
-               </small>
-          </h3>
-     </div>
-     <div>{{ comentario.text | linebreaks }}</div>
+<div class="card mb-3">
+      <div class="card-header">
+            <h3 class="h5">
+                  {{ comentario.date_added | date:"d F Y, H:i"}}
+                  <small class="text-muted">
+                        | <a href="{% url 'editar_comentario' comentario.id%}" class="text-decoration-none">Editar comentário</a>
+                        |
+                        <a href="{% url 'excluir_comentario' comentario.id %}" method="post" class="text-decoration-none">Excluir comentário {% csrf_token %}</a>
+                  </small>
+            </h3>
+      </div>
+
+      <div class="card-body">{{ comentario.text | linebreaks }}</div>
 </div>
 
-{% empty %} Ainda não há comentários. {% endfor %} {% endblock content%}
+{% empty %}
+<p class="text-muted">Ainda não há comentários.</p>
+{% endfor %} {% endblock content %}
