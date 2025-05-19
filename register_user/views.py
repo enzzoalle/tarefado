@@ -7,7 +7,6 @@ from datetime import timedelta
 from django.utils import timezone
 
 def register_user(request):
-
      if request.user.is_authenticated:
           return redirect('index')
 
@@ -15,20 +14,15 @@ def register_user(request):
           form = RegisterForm(request.POST)
 
           if form.is_valid():
-
                email = form.cleaned_data['email']
                dominio = request.get_host()
-
                user = form.save(commit=False) # pro usuário ser salvo inativo
                user.is_active = False
                user.save()
-
                code = CodigoEmail.objects.create(user=user)
                code.save()
-
                url = 'http://'+ dominio + '/register/confirmar_email/' + code.code
                enviar_email.enviar_email(url=url, email=email)
-
                messages.success(request, 'Usuário registrado com sucesso, verifique seu email em até 5 minutos para confirmação de cadastro. (Verifique o lixo eletrônico e spam)')
                return redirect('register_user')
 

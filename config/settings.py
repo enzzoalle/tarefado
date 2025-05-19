@@ -23,6 +23,7 @@ INSTALLED_APPS = [
     'materias',
     'register_user',
     'authenticate',
+    'tarefas',
 ]
 
 MIDDLEWARE = [

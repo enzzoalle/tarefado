@@ -56,7 +56,7 @@ def excluir_materia(request, materia_id):
         return HttpResponseRedirect(reverse('materias'))
     
     context = {'materia':materia}
-    return render (request, 'materias/excluir_materia.html', context)
+    return render(request, 'materias/excluir_materia.html', context)
 
 @login_required
 def novo_comentario(request, materia_id):

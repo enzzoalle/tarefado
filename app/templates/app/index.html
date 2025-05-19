@@ -1,16 +1,14 @@
 {% extends 'app/base.html' %}{% block header %}
-<div class="text-center">
+<div class="text-center mb-4">
       <h1>Acompanhe sua bagunça semestral</h1>
 </div>
 {% endblock header %} {% block content %}{% if user.is_authenticated %}
-<div style="margin-bottom: 50px">
-      <h2>
-            Menos foco, mais ansiedade. A procrastinação te trouxe até aqui, que tal fingir que vai organizar sua rotina? Seu semestre não vai se sabotar sozinho, bora abrir suas
-            <a href="{% url 'materias' %}">matérias</a>
-            ou as
-            <a href="#">tarefas</a>?
-      </h2>
-</div>
+<h2>
+      Menos foco, mais ansiedade. A procrastinação te trouxe até aqui, que tal fingir que vai organizar sua rotina? Seu semestre não vai se sabotar sozinho, bora abrir suas
+      <a href="{% url 'materias' %}">matérias</a>
+      ou as
+      <a href="{% url 'tarefas' %}">tarefas</a>?
+</h2>
 {% else %}
 <h2>
       <a href="{% url 'register_user' %}">Crie uma conta</a>

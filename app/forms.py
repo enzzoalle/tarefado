@@ -18,14 +18,14 @@ class ComentarioForm(forms.ModelForm):
         model = Comentario
         fields = ['text']
         labels = {'text': ''}
-        widgets = {'text':forms.Textarea(attrs={'cols':50})}
+        widgets = {'text':forms.Textarea(attrs={'cols':55})}
 
-class TarefaForm(forms.Form):
-    tarefa = forms.CharField(
-        max_length=55,
-        required = True,
-        widget = forms.TextInput(
-            attrs={
-                'id':'id_tarefa',
-                'class':'form-control',
-                'placeholder':'Digite sua tarefa...'}))
+class TarefaForm(forms.ModelForm):
+    class Meta:
+        model = Tarefa
+        fields = ['tarefa']
+        labels = {'tarefa': ''}
+        widgets = {
+            'tarefa': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Digite sua nova tarefa...'})}
