@@ -9,7 +9,7 @@
       <a href="{% url 'excluir_materia' materia.id %}" method="post" style="display:inline">Excluir matéria
             {% csrf_token %}
       </a> | 
-      <a href="#">Adicionar novo comentário</a>
+      <a href="{% url 'novo_comentario' materia.id%}">Adicionar novo comentário</a>
 </p>
 
 {% for comentario in comentarios %}
@@ -17,7 +17,7 @@
      <div>
           <h3>{{ comentario.date_added | date:"d F Y, H:i" }}
                <small>
-                    <a href="#">Editar comentário</a> | <a href="#" method="post">Excluir comentário {% csrf_token %}</a>
+                    <a href="{% url 'editar_comentario' comentario.id %}">Editar comentário</a> | <a href="{% url 'excluir_comentario' comentario.id %}" method="post">Excluir comentário {% csrf_token %}</a>
                </small>
           </h3>
      </div>

@@ -1,0 +1,13 @@
+{% extends 'app/base.html' %} {% block content %}
+
+<h1>
+      <a href="{% url 'materia' materia.id %}">{{ materia }}</a>
+</h1>
+
+<h3>Editar comentário:</h3>
+<form action="{% url 'editar_comentario' comentario.id %}" method="post">
+      {% csrf_token %} {{ form.as_p }}
+      <button name="enviar" class="btn btn-primary" style="border-radius: 8px">Salvar alterações</button>
+</form>
+
+{% endblock %}

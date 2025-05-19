@@ -17,7 +17,7 @@ class ComentarioForm(forms.ModelForm):
     class Meta:
         model = Comentario
         fields = ['text']
-        label = {'text': ''}
+        labels = {'text': ''}
         widgets = {'text':forms.Textarea(attrs={'cols':50})}
 
 class TarefaForm(forms.Form):
