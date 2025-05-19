@@ -1,0 +1,13 @@
+{% extends 'app/base.html' %} {% block header %}
+
+<h1 class="mb-1">Tem certeza que deseja excluir esta matéria e todos seus comentários?</h1>
+<h2>"{{ materia }}"</h2>
+{% endblock header %}{% block content %}
+
+<form action="{% url 'excluir_materia' materia.id %}" method="post">
+      {% csrf_token %} {% buttons %}
+      <button name="excluir" class="btn btn-danger">Sim, excluir matéria</button>
+      {% endbuttons %}
+</form>
+
+{% endblock content%}

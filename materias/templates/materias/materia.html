@@ -6,7 +6,10 @@
 {% endblock header %}{% block content %}
 
 <p>
-     <a href="#" method="post">Excluir matéria{% csrf_token %}</a> | <a href="#">Adicionar novo comentário</a>
+      <a href="{% url 'excluir_materia' materia.id %}" method="post" style="display:inline">Excluir matéria
+            {% csrf_token %}
+      </a> | 
+      <a href="{% url 'novo_comentario' materia.id%}">Adicionar novo comentário</a>
 </p>
 
 {% for comentario in comentarios %}
