@@ -1,17 +1,17 @@
 {% extends 'app/base.html' %} {% block header %}
-<div class="mb-lg-4">
+<div class="mb-lg-3">
       <h1>Matérias:</h1>
 </div>
 {% endblock header %} {% block content %}
 <ul>
       {% for materia in materias %}
       <li>
-            <h3>
+            <h3 class="mb-lg-4">
                   <a href="{% url 'materia' materia.id %}">{{ materia }}</a>
             </h3>
       </li>
       {% empty %}
-      <li>Não há matérias adicionadas!</li>
+      <h4 class="mb-lg-4">Não há matérias adicionadas!</h4>
       {% endfor %}
 </ul>
 <h3>

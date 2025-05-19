@@ -13,9 +13,9 @@
 </div>
 {% else %}
 <h2>
-      <a href="#">Crie uma conta</a>
+      <a href="{% url 'register_user' %}">Crie uma conta</a>
       ou
-      <a href="#">faça login</a>
+      <a href="{% url 'login_view' %}">faça login</a>
       para utilizar o Tarefado!
 </h2>
 

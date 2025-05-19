@@ -1,0 +1,47 @@
+{% extends 'app/base.html' %} {% block content %}
+
+<div class="col-12 row justify-content-center">
+      <h2 class="text-center">Faça seu cadastro</h2>
+      <form method="post" class="shadow p-4 col-10 col-lg-6">
+
+            {% if messages %}
+                  <div class="mb-3 alert alert-success">
+                        {% for message in messages %}
+                              {{ message }}</br>
+                        {% endfor %}
+                  </div>
+            {% endif %}
+
+            {% csrf_token %}
+
+            {% if form.errors %}
+                  {% for field, errors in form.errors.items %}
+                  <div class="alert alert-danger">
+                        {%for error in errors%}
+                              <span class="form-erro">* {{ error }}</span></br>
+                        {% endfor %}
+                  </div>
+                  {% endfor %}
+            {% endif %}
+
+            <div class="mb-3">
+                  <label for="cadastro_user_username" class="form-label">Usuário:</label>
+                  {{ form.username }}
+            </div>
+            <div class="mb-3">
+                  <label for="cadastro_user_email" class="form-label">Email:</label>
+                  {{ form.email }}
+            </div>
+            <div class="mb-3">
+                  <label for="cadastro_user_password1" class="form-label">Digite sua senha:</label>
+                  {{ form.password1 }}
+            </div>
+            <div class="mb-3">
+                  <label for="cadastro_user_password2" class="form-label">Confirme sua senha:</label>
+                  {{ form.password2 }}
+            </div>
+            <button type="submit" class="form-control btn btn-primary">Cadastrar</button>
+      </form>
+</div>
+
+{% endblock %}
