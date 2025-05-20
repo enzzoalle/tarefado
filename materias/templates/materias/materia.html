@@ -1,31 +1,27 @@
 {% extends "app/base.html" %} {% block header %}
-
 <h1>{{ materia }}</h1>
-
 {% endblock header %} {% block content %}
-
 <p class="mb-4">
-      <a href="{% url 'excluir_materia' materia.id %}" method="post" class="text-decoration-none">Excluir matéria {% csrf_token %}</a>
+      <a href="#" class="text-decoration-none" data-bs-toggle="delete" data-url="{% url 'excluir_materia' materia.id %}">Excluir matéria</a>
       |
-      <a href="{% url 'novo_comentario' materia.id%}" class="text-decoration-none">Adicionar novo comentário</a>
+      <a href="{% url 'novo_comentario' materia.id %}" class="text-decoration-none">Adicionar novo comentário</a>
 </p>
 
 {% for comentario in comentarios %}
 <div class="card mb-3">
       <div class="card-header">
             <h3 class="h5">
-                  {{ comentario.date_added | date:"d F Y, H:i"}}
+                  {{ comentario.date_added|date:"d F Y, H:i" }}
                   <small class="text-muted">
-                        | <a href="{% url 'editar_comentario' comentario.id%}" class="text-decoration-none">Editar comentário</a>
                         |
-                        <a href="{% url 'excluir_comentario' comentario.id %}" method="post" class="text-decoration-none">Excluir comentário {% csrf_token %}</a>
+                        <a href="{% url 'editar_comentario' comentario.id %}" class="text-decoration-none">Editar comentário</a>
+                        |
+                        <a href="#" class="text-decoration-none" data-bs-toggle="delete" data-url="{% url 'excluir_comentario' comentario.id %}">Excluir comentário</a>
                   </small>
             </h3>
       </div>
-
       <div class="card-body">{{ comentario.text | linebreaks }}</div>
 </div>
-
 {% empty %}
 <p class="text-muted">Ainda não há comentários.</p>
 {% endfor %} {% endblock content %}

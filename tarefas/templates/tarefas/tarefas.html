@@ -22,7 +22,7 @@
             <!-- Tarefas Pendentes -->
             <div class="card shadow mb-4">
                   <div class="card-header border-bottom">
-                        <h5 class="mb-0">Tarefas Pendentes</h5>
+                        <h5 class="mb-0">Tarefas pendentes</h5>
                   </div>
                   <div class="card-body">
                         {% if tarefas_pendentes %}
@@ -46,7 +46,7 @@
             <!-- Tarefas Concluídas -->
             <div class="card shadow mb-4">
                   <div class="card-header border-bottom d-flex justify-content-between align-items-center">
-                        <h5 class="mb-0">Tarefas Concluídas</h5>
+                        <h5 class="mb-0">Tarefas concluídas</h5>
                         <form method="post" action="{% url 'limpar_tarefas_concluidas' %}">
                               {% csrf_token %}
                               <button type="submit" class="btn btn-danger btn-sm">Limpar</button>

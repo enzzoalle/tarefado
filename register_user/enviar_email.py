@@ -7,7 +7,7 @@ load_dotenv()
 
 def enviar_email(url, email):
      try:
-          conteudo_email = "<div style='text-align:center;'><h3>Blog</h3><p>Clique no link para validar seu email: "+str(url)+"</p></div>"
+          conteudo_email = "<div style='text-align:center;'><h3>Tarefado</h3><p>Clique no link para validar seu email: "+str(url)+"</p></div>"
 
           msg = EmailMessage()
           msg.set_content(conteudo_email, subtype='html')

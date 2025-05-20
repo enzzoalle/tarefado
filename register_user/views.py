@@ -34,7 +34,7 @@ def register_user(request):
      context = {'form':form}
      return render(request, 'register_user/register_user.html', context)
 
-def confirmar_email(code):
+def confirmar_email(request, code):
      codigo_email = get_object_or_404(CodigoEmail, code=code)
      user = codigo_email.user
 

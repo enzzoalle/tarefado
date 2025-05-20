@@ -61,5 +61,38 @@
                   <div class="container p-2">{% block content %}{% endblock %}</div>
             </div>
             <script src="{% static 'js/bootstrap.min.js' %}"></script>
+            <div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
+                  <div class="modal-dialog">
+                        <div class="modal-content">
+                              <div class="modal-header">
+                                    <h5 class="modal-title" id="confirmDeleteModalLabel">Confirmar exclusão</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                              </div>
+                              <div class="modal-body">Você tem certeza que deseja excluir este item?</div>
+                              <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                    <form id="deleteForm" method="post" style="display: inline">
+                                          {% csrf_token %}
+                                          <button type="submit" class="btn btn-danger">Excluir</button>
+                                    </form>
+                              </div>
+                        </div>
+                  </div>
+            </div>
+
+            <script>
+                  document.addEventListener("DOMContentLoaded", function () {
+                        const deleteForm = document.getElementById("deleteForm");
+                        document.querySelectorAll('[data-bs-toggle="delete"]').forEach((button) => {
+                              button.addEventListener("click", function (e) {
+                                    e.preventDefault();
+                                    const deleteUrl = this.getAttribute("data-url");
+                                    deleteForm.action = deleteUrl;
+                                    const modal = new bootstrap.Modal(document.getElementById("confirmDeleteModal"));
+                                    modal.show();
+                              });
+                        });
+                  });
+            </script>
       </body>
 </html>

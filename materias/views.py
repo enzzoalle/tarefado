@@ -1,6 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from app.models import Materia, Comentario
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.http import require_POST
 from app.forms import MateriaForm, ComentarioForm
 from django.urls import reverse
 from django.http import HttpResponseRedirect
@@ -44,19 +45,11 @@ def nova_materia(request):
     return render(request, 'materias/nova_materia.html', context)
 
 @login_required
+@require_POST
 def excluir_materia(request, materia_id):
-    materia = Materia.objects.get(id=materia_id)
-
-    # garante que a matéria pertença ao usuário atual
-    if materia.user != request.user:
-        return render(request, 'app/erro_404.html', status=404)
-    
-    if request.method == 'POST':
-        materia.delete()
-        return HttpResponseRedirect(reverse('materias'))
-    
-    context = {'materia':materia}
-    return render(request, 'materias/excluir_materia.html', context)
+    materia = get_object_or_404(Materia, id=materia_id, user=request.user)
+    materia.delete()
+    return HttpResponseRedirect(reverse('materias'))
 
 @login_required
 def novo_comentario(request, materia_id):
@@ -100,16 +93,9 @@ def editar_comentario(request, comentario_id):
     return render(request, 'materias/editar_comentario.html', context)
 
 @login_required
+@require_POST
 def excluir_comentario(request, comentario_id):
-    comentario = Comentario.objects.get(id=comentario_id)
-    materia = comentario.materia
-
-    if materia.user != request.user:
-        return render(request, 'app/erro_404.html', status=404)
-    
-    if request.method == 'POST':
-        comentario.delete()
-        return HttpResponseRedirect(reverse('materia', args=[materia.id]))
-    
-    context = {'comentario':comentario, 'materia':materia}
-    return render (request, 'materias/excluir_comentario.html', context)
+    comentario = get_object_or_404(Comentario, id=comentario_id, materia__user=request.user)
+    materia_id = comentario.materia.id
+    comentario.delete()
+    return HttpResponseRedirect(reverse('materia', args=[materia_id]))
