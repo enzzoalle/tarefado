@@ -9,12 +9,8 @@ from django.http import HttpResponseRedirect
 @login_required
 def materia(request, materia_id):
     """Página de matéria única"""
-    materia = Materia.objects.get(id = materia_id)
-
-    # garante que a matéria pertença ao usuário atual
-    if materia.user != request.user:
-        return render(request, 'app/erro_404.html', status=404)
-    
+    # Garante que a matéria exista e pertença ao usuário atual
+    materia = get_object_or_404(Materia, id=materia_id, user=request.user)
     comentarios = materia.comentario_set.order_by('-date_added')
     context = {'materia': materia, 'comentarios': comentarios}
     return render(request, 'materias/materia.html', context)
@@ -53,11 +49,8 @@ def excluir_materia(request, materia_id):
 
 @login_required
 def novo_comentario(request, materia_id):
-    materia = Materia.objects.get(id=materia_id)
-
-    if materia.user != request.user:
-        return render(request, 'app/erro_404.html', status=404)
-    
+    # Garante que a matéria exista e pertença ao usuário atual
+    materia = get_object_or_404(Materia, id=materia_id, user=request.user)
     if request.method != 'POST':
         form = ComentarioForm()
     else:
@@ -74,12 +67,9 @@ def novo_comentario(request, materia_id):
 
 @login_required
 def editar_comentario(request, comentario_id):
-    comentario = Comentario.objects.get(id=comentario_id)
+    # Garante que o comentário exista e que a matéria associada pertença ao usuário atual
+    comentario = get_object_or_404(Comentario, id=comentario_id, materia__user=request.user)
     materia = comentario.materia
-
-    if materia.user != request.user:
-        return render(request, 'app/erro_404.html', status=404)
-    
     if request.method != 'POST':
         form = ComentarioForm(instance=comentario)
     else:
