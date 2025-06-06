@@ -24,6 +24,7 @@ INSTALLED_APPS = [
     'register_user',
     'authenticate',
     'tarefas',
+    'agenda',
 ]
 
 MIDDLEWARE = [
