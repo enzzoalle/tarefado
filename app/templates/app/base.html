@@ -9,6 +9,9 @@
             <link href="{% static 'css/style.css' %}" type="text/css" media="all" rel="stylesheet" />
             <title>Tarefado</title>
             <link rel="icon" href="{% static 'img/icon.ico' %}" type="image/x-icon" />
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" />
+            <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+            <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/pt.js"></script>
       </head>
       <body>
             <nav class="navbar navbar-expand-lg bg-body-tertiary">
@@ -30,8 +33,11 @@
                                     <li class="nav-item">
                                           <a class="nav-link" aria-current="page" href="{% url 'materias' %}">Matérias</a>
                                     </li>
-                                    <li class="nav-item me-4">
+                                    <li class="nav-item">
                                           <a class="nav-link" href="{% url 'tarefas' %}">Tarefas</a>
+                                    </li>
+                                    <li class="nav-item me-4">
+                                          <a class="nav-link" href="{% url 'agenda' %}">Agenda</a>
                                     </li>
                               </ul>
                               {% if user.is_authenticated %}
@@ -80,6 +86,7 @@
                   </div>
             </div>
 
+            <!-- JS para a caixa de confirmação de exclusão -->
             <script>
                   document.addEventListener("DOMContentLoaded", function () {
                         const deleteForm = document.getElementById("deleteForm");
@@ -91,6 +98,16 @@
                                     const modal = new bootstrap.Modal(document.getElementById("confirmDeleteModal"));
                                     modal.show();
                               });
+                        });
+                  });
+            </script>
+
+            <!-- JS para a data de entrega das tarefas da agenda -->
+            <script>
+                  document.addEventListener("DOMContentLoaded", function () {
+                        flatpickr("#id_data_entrega", {
+                              dateFormat: "d/m/Y",
+                              locale: "pt",
                         });
                   });
             </script>

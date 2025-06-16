@@ -8,4 +8,5 @@ urlpatterns = [
     path('register/', include('register_user.urls')),
     path('authenticate/', include('authenticate.urls')),
     path('tarefas/', include('tarefas.urls')),
+    path('agenda/', include('agenda.urls')),
 ]

@@ -1,43 +1,43 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.decorators import login_required
 from app.models import Tarefa
 from app.forms import TarefaForm
-from django.contrib.auth.decorators import login_required
 
-@login_required
+@login_required(login_url='login_view')
 def tarefas(request):
     """Página de tarefas"""
-    tarefas_pendentes = Tarefa.objects.filter(user=request.user, status=False)
-    tarefas_concluidas = Tarefa.objects.filter(user=request.user, status=True)
+    pendentes = Tarefa.objects.filter(user=request.user, status=False)
+    concluidas = Tarefa.objects.filter(user=request.user, status=True)
 
-    if request.method == 'POST':
-        form = TarefaForm(request.POST)
+    form = TarefaForm(request.POST or None)
 
-        if form.is_valid():
-            nova_tarefa = form.save(commit=False)
-            nova_tarefa.user = request.user
-            nova_tarefa.status = False
-            nova_tarefa.save()
-            return redirect('tarefas')
-    else:
-        form = TarefaForm()
+    if request.method == 'POST' and form.is_valid():
+        tarefa = form.save(commit=False)
+        tarefa.user = request.user
+        tarefa.status = False
+        tarefa.save()
+        return redirect('tarefas')
 
-    context = {'form': form, 'tarefas_concluidas': tarefas_concluidas, 'tarefas_pendentes': tarefas_pendentes}
+    context = {'form': form, 'tarefas_pendentes': pendentes, 'tarefas_concluidas': concluidas}
     return render(request, 'tarefas/tarefas.html', context)
 
-@login_required
+@login_required(login_url='login_view')
 def concluir_tarefa(request, id):
-    tarefa = get_object_or_404(Tarefa, id=id)
+    """Marca uma tarefa como concluída"""
+    tarefa = get_object_or_404(Tarefa, id=id, user=request.user)
     tarefa.status = True
     tarefa.save()
     return redirect('tarefas')
 
-@login_required
+@login_required(login_url='login_view')
 def excluir_tarefa(request, id):
-    tarefa = get_object_or_404(Tarefa, id=id)
+    """Exclui uma tarefa"""
+    tarefa = get_object_or_404(Tarefa, id=id, user=request.user)
     tarefa.delete()
     return redirect('tarefas')
 
-@login_required
+@login_required(login_url='login_view')
 def limpar_tarefas_concluidas(request):
+    """Remove todas as tarefas que já foram concluídas"""
     Tarefa.objects.filter(user=request.user, status=True).delete()
     return redirect('tarefas')

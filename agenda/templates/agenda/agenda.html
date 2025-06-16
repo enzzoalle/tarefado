@@ -1,0 +1,96 @@
+{% extends 'app/base.html' %} {% load widget_tweaks %} {% block content %}
+<div class="row g-4">
+      <div class="col-12 col-md-4">
+            <form method="post" class="p-4 rounded shadow">
+                  {% csrf_token %} {% if form.errors %}
+                  <div class="alert alert-danger">
+                        {% for field, errors in form.errors.items %} {% for error in errors %}
+                        <div>* {{ error }}</div>
+                        {% endfor %} {% endfor %}
+                  </div>
+                  {% endif %}
+
+                  <div class="mb-3">
+                        <label for="id_tarefa" class="form-label fw-semibold">Nova tarefa:</label>
+                        {{ form.tarefa|add_class:"form-control bg-dark text-white" }}
+                  </div>
+                  <div class="mb-3">
+                        <label for="id_data_entrega" class="form-label fw-semibold mb-0">Data de entrega:</label>
+                        {{ form.data_entrega|add_class:"form-control bg-dark text-white" }}
+                  </div>
+                  <div class="mb-3">
+                        <label for="id_materia" class="form-label fw-semibold">Matéria:</label>
+                        {{ form.materia }}
+                  </div>
+                  <button type="submit" class="btn btn-primary w-100">Adicionar</button>
+            </form>
+      </div>
+
+      <div class="col-12 col-md-8">
+            <!-- Tarefas Pendentes -->
+            <div class="card shadow mb-4">
+                  <div class="card-header border-bottom">
+                        <h5 class="mb-0">Tarefas pendentes</h5>
+                  </div>
+                  <div class="card-body p-0">
+                        {% if tarefas_pendentes %}
+                        <div class="list-group list-group-flush">
+                              {% for tarefa in tarefas_pendentes %}
+                              <div class="list-group-item p-3">
+                                    <div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center gap-2">
+                                          <div class="d-flex flex-column">
+                                                <span class="fw-semibold">{{ tarefa.tarefa }}</span>
+                                                <div class="d-flex flex-wrap gap-1 mt-1">
+                                                      {% if tarefa.materia %}
+                                                      <span class="badge bg-secondary">{{ tarefa.materia }}</span>
+                                                      {% else %}
+                                                      <span class="badge bg-light text-dark">Sem matéria</span>
+                                                      {% endif %} {% if tarefa.data_entrega %}
+                                                      <span class="badge bg-info text-dark">{{ tarefa.data_entrega|date:"d/m/Y" }}</span>
+                                                      {% endif %}
+                                                </div>
+                                          </div>
+                                          <div class="d-flex gap-2 mt-2 mt-md-0">
+                                                <a href="{% url 'concluir_tarefa_agenda' tarefa.id %}" class="btn btn-sm btn-outline-success flex-shrink-0">Concluir</a>
+                                                <a href="{% url 'excluir_tarefa_agenda' tarefa.id %}" class="btn btn-sm btn-outline-danger flex-shrink-0">Excluir</a>
+                                          </div>
+                                    </div>
+                              </div>
+                              {% endfor %}
+                        </div>
+                        {% else %}
+                        <p class="text-muted p-3 mb-0">Não há tarefas pendentes!</p>
+                        {% endif %}
+                  </div>
+            </div>
+
+            <!-- Tarefas Concluídas -->
+            <div class="card shadow mb-4">
+                  <div class="card-header border-bottom d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0">Tarefas concluídas</h5>
+                        <form method="post" action="{% url 'limpar_tarefas_concluidas_agenda' %}">
+                              {% csrf_token %}
+                              <button type="submit" class="btn btn-danger btn-sm">Limpar</button>
+                        </form>
+                  </div>
+                  <div class="card-body p-3">
+                        {% if tarefas_concluidas %}
+                        <div class="d-flex flex-wrap gap-2">
+                              {% for tarefa in tarefas_concluidas %}
+                              <span class="badge bg-success p-2 fs-6">
+                                    {{ tarefa.tarefa }} {% if tarefa.materia %}
+                                    <span class="badge bg-light text-dark ms-1">{{ tarefa.materia }}</span>
+                                    {% endif %} {% if tarefa.data_entrega %}
+                                    <span class="badge bg-info text-dark ms-1">{{ tarefa.data_entrega|date:"d/m/Y" }}</span>
+                                    {% endif %}
+                              </span>
+                              {% endfor %}
+                        </div>
+                        {% else %}
+                        <p class="text-muted mb-0">Não há tarefas concluídas!</p>
+                        {% endif %}
+                  </div>
+            </div>
+      </div>
+</div>
+{% endblock %}
