@@ -1,14 +1,16 @@
-{% extends 'app/base.html' %} {% block header %} {% endblock header %}{% block content %}
-
+{% extends 'app/base.html' %} {% block header %}{% endblock header %} {% block content %}
 <div class="container">
       <div class="col-md-5">
             <h3 class="mb-lg-3">Novo comentário:</h3>
-            <form action="{% url 'novo_comentario' materia.id %}" method="post">
+            <form action="{% url 'novo_comentario' materia.id %}" method="post" enctype="multipart/form-data">
                   {% csrf_token %}
                   <div class="mb-lg-3">
                         {{ form.text }} {% if form.text.errors %}
                         <div class="text-danger">{{ form.text.errors }}</div>
                         {% endif %}
+                  </div>
+                  <div class="mb-lg-3">
+                        <input type="file" name="arquivos" multiple class="form-control" />
                   </div>
                   <button type="submit" class="btn btn-primary">Adicionar</button>
             </form>

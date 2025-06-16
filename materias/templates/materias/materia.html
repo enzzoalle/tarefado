@@ -1,27 +1,64 @@
-{% extends "app/base.html" %} {% block header %}
+<!-- Não salvar se não o código quebra com erros de identação de if e elses (meu problema pode ser com prettier)-->
+
+{% extends "app/base.html" %}
+{% block header %}
 <h1>{{ materia }}</h1>
-{% endblock header %} {% block content %}
+{% endblock header %}
+
+{% block content %}
 <p class="mb-4">
-      <a href="#" class="text-decoration-none" data-bs-toggle="delete" data-url="{% url 'excluir_materia' materia.id %}">Excluir matéria</a>
-      |
-      <a href="{% url 'novo_comentario' materia.id %}" class="text-decoration-none">Adicionar novo comentário</a>
+    <a href="#" class="text-decoration-none" data-bs-toggle="delete" data-url="{% url 'excluir_materia' materia.id %}">Excluir matéria</a>
+    |
+    <a href="{% url 'novo_comentario' materia.id %}" class="text-decoration-none">Adicionar novo comentário</a>
 </p>
 
 {% for comentario in comentarios %}
 <div class="card mb-3">
-      <div class="card-header">
-            <h3 class="h5">
-                  {{ comentario.date_added|date:"d F Y, H:i" }}
-                  <small class="text-muted">
-                        |
-                        <a href="{% url 'editar_comentario' comentario.id %}" class="text-decoration-none">Editar comentário</a>
-                        |
-                        <a href="#" class="text-decoration-none" data-bs-toggle="delete" data-url="{% url 'excluir_comentario' comentario.id %}">Excluir comentário</a>
-                  </small>
-            </h3>
-      </div>
-      <div class="card-body">{{ comentario.text | linebreaks }}</div>
+    <div class="card-header">
+        <h3 class="h5">
+            {{ comentario.date_added|date:"d F Y, H:i" }}
+            <small class="text-muted">
+                |
+                <a href="{% url 'editar_comentario' comentario.id %}" class="text-decoration-none">Editar comentário</a>
+                |
+                <a href="#" class="text-decoration-none" data-bs-toggle="delete" data-url="{% url 'excluir_comentario' comentario.id %}">Excluir comentário</a>
+            </small>
+        </h3>
+    </div>
+    <div class="card-body">
+    {{ comentario.text|linebreaks }}
+    
+    {% if comentario.arquivos.all %}
+    <hr />
+    <p><strong>Anexos:</strong></p>
+    <div class="d-flex flex-wrap gap-2">
+        {% for arquivo in comentario.arquivos.all %}
+        <div>
+            {% with arquivo.arquivo.url|lower as url %}
+                {% if url|slice:"-4:" == ".jpg" or url|slice:"-5:" == ".jpeg" or url|slice:"-4:" == ".png" or url|slice:"-4:" == ".gif" %}
+                    <img src="{{ arquivo.arquivo.url }}" alt="Imagem" style="max-width: 200px; max-height: 200px" class="img-thumbnail mb-2" />
+                {% else %}
+                    {% if url|slice:"-4:" == ".pdf" %}
+                        <a href="{{ arquivo.arquivo.url }}" target="_blank" class="btn btn-outline-primary">
+                            <i class="bi bi-file-earmark-pdf"></i>
+                            PDF
+                        </a>
+                    {% else %}
+                        <a href="{{ arquivo.arquivo.url }}" target="_blank" class="btn btn-outline-secondary">
+                            <i class="bi bi-paperclip"></i>
+                            Download
+                        </a>
+                    {% endif %}
+                {% endif %}
+            {% endwith %}
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+</div>
 </div>
 {% empty %}
 <p class="text-muted">Ainda não há comentários.</p>
-{% endfor %} {% endblock content %}
+{% endfor %}
+
+{% endblock content %}
