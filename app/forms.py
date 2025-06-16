@@ -16,7 +16,7 @@ class ComentarioForm(forms.ModelForm):
         model = Comentario
         fields = ['text']
         labels = {'text': ''}
-        widgets = {'text':forms.Textarea(attrs={'cols':100})}
+        widgets = {'text': forms.Textarea(attrs={'cols': 100})}
 
 class TarefaForm(forms.ModelForm):
     class Meta:
@@ -47,6 +47,6 @@ class TarefaAgendaForm(forms.ModelForm):
         user = kwargs.pop('user', None)
         super().__init__(*args, **kwargs)
         if user:
-            self.fields['materia'].queryset = Materia.objects.filter(user=user)
+            self.fields['materia'].queryset = Materia.objects.filter(user=user).order_by('titulo')
             self.fields['materia'].required = False
             self.fields['materia'].empty_label = 'Sem matéria vinculada'

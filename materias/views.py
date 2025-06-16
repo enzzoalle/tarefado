@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from app.models import Materia, Comentario
+from app.models import Materia, Comentario, ArquivoComentario
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_POST
 from app.forms import MateriaForm, ComentarioForm
@@ -44,7 +44,7 @@ def excluir_materia(request, materia_id):
 
 @login_required(login_url='login_view')
 def novo_comentario(request, materia_id):
-    """Adiciona um novo comentário à matéria"""
+    """Adiciona um novo comentário a uma matéria"""
     materia = get_object_or_404(Materia, id=materia_id, user=request.user)
     form = ComentarioForm(request.POST or None)
 
@@ -52,6 +52,10 @@ def novo_comentario(request, materia_id):
         comentario = form.save(commit=False)
         comentario.materia = materia
         comentario.save()
+
+        for arquivo in request.FILES.getlist('arquivos'):
+            ArquivoComentario.objects.create(comentario=comentario, arquivo=arquivo)
+
         return redirect('materia', materia_id=materia.id)
 
     context = {'materia': materia, 'form': form}
