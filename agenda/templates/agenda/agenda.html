@@ -12,15 +12,15 @@
 
                   <div class="mb-3">
                         <label for="id_tarefa" class="form-label fw-semibold">Nova tarefa:</label>
-                        {{ form.tarefa|add_class:"form-control bg-dark text-white" }}
+                        {{ form.tarefa | add_class:"form-control bg-dark text-white" }}
                   </div>
                   <div class="mb-3">
                         <label for="id_data_entrega" class="form-label fw-semibold">Data de entrega:</label>
-                        {{ form.data_entrega|add_class:"form-control bg-dark text-white" }}
+                        {{ form.data_entrega | add_class:"form-control bg-dark text-white" }}
                   </div>
                   <div class="mb-3">
                         <label for="id_materia" class="form-label fw-semibold">Matéria:</label>
-                        {{ form.materia }}
+                        {{ form.materia | add_class:"form-control bg-dark text-white" }}
                   </div>
                   <button type="submit" class="btn btn-primary w-100">Adicionar</button>
             </form>
@@ -46,7 +46,7 @@
                                                       {% else %}
                                                       <span class="badge bg-light text-dark fs-6">Sem matéria</span>
                                                       {% endif %} {% if tarefa.data_entrega %}
-                                                      <span class="badge bg-info text-dark fs-6">{{ tarefa.data_entrega|date:"d/m/Y" }}</span>
+                                                      <span class="badge bg-info text-dark fs-6">{{ tarefa.data_entrega | date:"d/m/Y" }}</span>
                                                       {% endif %}
                                                 </div>
                                           </div>
@@ -81,7 +81,7 @@
                                     {{ tarefa.tarefa }} {% if tarefa.materia %}
                                     <span class="badge bg-light text-dark ms-1">{{ tarefa.materia }}</span>
                                     {% endif %} {% if tarefa.data_entrega %}
-                                    <span class="badge bg-info text-dark ms-1">{{ tarefa.data_entrega|date:"d/m/Y" }}</span>
+                                    <span class="badge bg-info text-dark ms-1">{{ tarefa.data_entrega | date:"d/m/Y" }}</span>
                                     {% endif %}
                               </span>
                               {% endfor %}
