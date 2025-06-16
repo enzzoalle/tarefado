@@ -5,9 +5,9 @@
 {% endblock header %} {% block content %}{% if user.is_authenticated %}
 <h2>
       Menos foco, mais ansiedade. A procrastinação te trouxe até aqui, que tal fingir que vai organizar sua rotina? Seu semestre não vai se sabotar sozinho, bora abrir suas
-      <a href="{% url 'materias' %}">matérias</a>
-      ou as
-      <a href="{% url 'tarefas' %}">tarefas</a>?
+      <a href="{% url 'materias' %}">matérias</a>, <a href="{% url 'tarefas' %}">tarefas</a> 
+      ou a
+      <a href="{% url 'agenda' %}">agenda</a>?
 </h2>
 {% else %}
 <h2>

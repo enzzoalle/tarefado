@@ -25,6 +25,7 @@ INSTALLED_APPS = [
     'authenticate',
     'tarefas',
     'agenda',
+    'widget_tweaks',
 ]
 
 MIDDLEWARE = [

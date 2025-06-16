@@ -25,3 +25,13 @@ class Tarefa(models.Model):
      
      def __str__(self):
           return self.tarefa
+     
+class TarefaAgenda(models.Model):
+     user = models.ForeignKey(User, on_delete=models.CASCADE)
+     tarefa = models.CharField(max_length=55)
+     status = models.BooleanField(default=False)
+     materia = models.ForeignKey(Materia, on_delete=models.SET_NULL, null=True, blank=True)
+     data_entrega = models.DateField(null=True, blank=True)
+     
+     def __str__(self):
+          return self.tarefa
