@@ -1,14 +1,96 @@
-{% extends 'app/base.html' %}{% block header %}
+{% extends 'app/base.html' %} {% block header %}
 <div class="text-center mb-4">
-      <h1>Acompanhe sua bagunça semestral</h1>
+      <h1>Painel do Caos</h1>
+      <p class="text-muted">Suas tarefas, provas e entregas num só lugar</p>
 </div>
-{% endblock header %} {% block content %}{% if user.is_authenticated %}
-<h2>
-      Menos foco, mais ansiedade. A procrastinação te trouxe até aqui, que tal fingir que vai organizar sua rotina? Seu semestre não vai se sabotar sozinho, bora abrir suas
-      <a href="{% url 'materias' %}">matérias</a>, <a href="{% url 'tarefas' %}">tarefas</a> 
-      ou a
-      <a href="{% url 'agenda' %}">agenda</a>?
-</h2>
+{% endblock header %} {% block content %} {% if user.is_authenticated %}
+
+<div class="container mt-2">
+      <div class="row g-2">
+            <!-- Tarefas gerais -->
+            <div class="col-md-6">
+                  <div class="card shadow">
+                        <div class="card-header bg-dark text-white d-flex align-items-center">
+                              <i class="bi bi-list-task me-2"></i>
+                              <span>Tarefas gerais</span>
+                        </div>
+                        <div class="card-body p-0">
+                              {% if tarefas_gerais %}
+                              <ul class="list-group list-group-flush">
+                                    {% for tarefa in tarefas_gerais %}
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                          {{ tarefa.tarefa }}
+                                          <a href="{% url 'concluir_tarefa' tarefa.id %}" class="btn btn-sm btn-outline-success">✓</a>
+                                    </li>
+                                    {% endfor %}
+                              </ul>
+                              {% else %}
+                              <p class="text-muted p-3">Sem tarefas gerais pendentes. Alguém está se enganando bem!</p>
+                              {% endif %}
+                        </div>
+                  </div>
+            </div>
+
+            <!-- Tarefas da agenda -->
+            <div class="col-md-6">
+                  <div class="card shadow">
+                        <div class="card-header bg-primary text-white d-flex align-items-center">
+                              <i class="bi bi-calendar-check me-2"></i>
+                              <span>Tarefas da agenda</span>
+                        </div>
+                        <div class="card-body p-0">
+                              {% if tarefas_agenda %}
+                              <ul class="list-group list-group-flush">
+                                    {% for tarefa in tarefas_agenda %}
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                          <div>
+                                                <strong>{{ tarefa.tarefa }}</strong>
+                                                <br />
+                                                {% if tarefa.materia %}
+                                                <span class="badge bg-secondary">{{ tarefa.materia }}</span>
+                                                {% endif %} {% if tarefa.data_entrega %}
+                                                <span class="badge bg-info text-dark">{{ tarefa.data_entrega | date:"d/m/Y" }}</span>
+                                                {% endif %}
+                                          </div>
+                                          <a href="{% url 'concluir_tarefa_agenda' tarefa.id %}" class="btn btn-sm btn-outline-success">✓</a>
+                                    </li>
+                                    {% endfor %}
+                              </ul>
+                              {% else %}
+                              <p class="text-muted p-3">Nenhuma tarefa agendada. Aproveite esse falso alívio.</p>
+                              {% endif %}
+                        </div>
+                  </div>
+            </div>
+
+            <!-- Tarefas próximas -->
+            <div class="col-12">
+                  <div class="card shadow">
+                        <div class="card-header bg-warning text-dark d-flex align-items-center">
+                              <i class="bi bi-exclamation-triangle me-2"></i>
+                              <span>Entregas nos próximos 7 dias</span>
+                        </div>
+                        <div class="card-body p-0">
+                              {% if tarefas_proximas %}
+                              <ul class="list-group list-group-flush">
+                                    {% for tarefa in tarefas_proximas %}
+                                    <li class="list-group-item">
+                                          <strong>{{ tarefa.tarefa }}</strong>
+                                          {% if tarefa.materia %}
+                                          <span class="badge bg-secondary">{{ tarefa.materia }}</span>
+                                          {% endif %}
+                                          <span class="badge bg-info text-dark">{{ tarefa.data_entrega | date:"d/m/Y" }}</span>
+                                    </li>
+                                    {% endfor %}
+                              </ul>
+                              {% else %}
+                              <p class="text-muted p-3">Nenhuma entrega nos próximos dias. Sossega (por enquanto)!</p>
+                              {% endif %}
+                        </div>
+                  </div>
+            </div>
+      </div>
+</div>
 {% else %}
 <h2>
       <a href="{% url 'register_user' %}">Crie uma conta</a>
@@ -18,5 +100,4 @@
 </h2>
 
 <h2>Menos disciplina, mais caos. Sua agenda já está esperando para ser ignorada!</h2>
-
 {% endif %} {% endblock content %}
