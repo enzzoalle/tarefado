@@ -15,7 +15,7 @@
                         {{ form.tarefa|add_class:"form-control bg-dark text-white" }}
                   </div>
                   <div class="mb-3">
-                        <label for="id_data_entrega" class="form-label fw-semibold mb-0">Data de entrega:</label>
+                        <label for="id_data_entrega" class="form-label fw-semibold">Data de entrega:</label>
                         {{ form.data_entrega|add_class:"form-control bg-dark text-white" }}
                   </div>
                   <div class="mb-3">
@@ -39,14 +39,14 @@
                               <div class="list-group-item p-3">
                                     <div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center gap-2">
                                           <div class="d-flex flex-column">
-                                                <span class="fw-semibold">{{ tarefa.tarefa }}</span>
+                                                <span class="fw-semibold fs-4">{{ tarefa.tarefa }}</span>
                                                 <div class="d-flex flex-wrap gap-1 mt-1">
                                                       {% if tarefa.materia %}
-                                                      <span class="badge bg-secondary">{{ tarefa.materia }}</span>
+                                                      <span class="badge bg-secondary fs-6">{{ tarefa.materia }}</span>
                                                       {% else %}
-                                                      <span class="badge bg-light text-dark">Sem matéria</span>
+                                                      <span class="badge bg-light text-dark fs-6">Sem matéria</span>
                                                       {% endif %} {% if tarefa.data_entrega %}
-                                                      <span class="badge bg-info text-dark">{{ tarefa.data_entrega|date:"d/m/Y" }}</span>
+                                                      <span class="badge bg-info text-dark fs-6">{{ tarefa.data_entrega|date:"d/m/Y" }}</span>
                                                       {% endif %}
                                                 </div>
                                           </div>
