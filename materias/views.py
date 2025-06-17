@@ -16,7 +16,7 @@ def materia(request, materia_id):
 @login_required(login_url='login_view')
 def materias(request):
     """Lista todas as matérias do usuário"""
-    materias = Materia.objects.filter(user=request.user).order_by('date_added')
+    materias = Materia.objects.filter(user=request.user).order_by('titulo')
     context = {'materias': materias}
     return render(request, 'materias/materias.html', context)
 
