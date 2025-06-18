@@ -6,7 +6,7 @@ from datetime import timedelta
 def index(request):
     if request.user.is_authenticated:
         hoje = timezone.now().date()
-        daqui_sete_dias = hoje + timedelta(days=7)
+        daqui_dez_dias = hoje + timedelta(days=10)
 
         # Tarefas comuns
         tarefas_gerais = Tarefa.objects.filter(user=request.user, status=False).order_by('-date_added')
@@ -15,7 +15,7 @@ def index(request):
         tarefas_agenda = TarefaAgenda.objects.filter(user=request.user, status=False).order_by('data_entrega')
 
         # Tarefas com prazo dentro dos próximos 7 dias
-        tarefas_proximas = TarefaAgenda.objects.filter(user=request.user, status=False, data_entrega__range=(hoje, daqui_sete_dias)).order_by('data_entrega')
+        tarefas_proximas = TarefaAgenda.objects.filter(user=request.user, status=False, data_entrega__range=(hoje, daqui_dez_dias)).order_by('data_entrega')
 
         return render(request, 'app/index.html', {'tarefas_gerais': tarefas_gerais, 'tarefas_agenda': tarefas_agenda, 'tarefas_proximas': tarefas_proximas})
 
