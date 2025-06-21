@@ -14,7 +14,7 @@ def index(request):
         # Tarefas da agenda
         tarefas_agenda = TarefaAgenda.objects.filter(user=request.user, status=False).order_by('data_entrega')
 
-        # Tarefas com prazo dentro dos próximos 7 dias
+        # Tarefas com prazo dentro dos próximos 10 dias
         tarefas_proximas = TarefaAgenda.objects.filter(user=request.user, status=False, data_entrega__range=(hoje, daqui_dez_dias)).order_by('data_entrega')
 
         return render(request, 'app/index.html', {'tarefas_gerais': tarefas_gerais, 'tarefas_agenda': tarefas_agenda, 'tarefas_proximas': tarefas_proximas})
