@@ -38,8 +38,11 @@
                                     <li class="nav-item">
                                           <a class="nav-link" href="{% url 'tarefas' %}">Tarefas</a>
                                     </li>
-                                    <li class="nav-item me-4">
+                                    <li class="nav-item">
                                           <a class="nav-link" href="{% url 'agenda' %}">Agenda</a>
+                                    </li>
+                                    <li class="nav-item me-4">
+                                          <a class="nav-link" href="{% url 'prompts' %}">Prompts</a>
                                     </li>
                               </ul>
                               {% if user.is_authenticated %}
@@ -65,7 +68,12 @@
                   </div>
             </nav>
             <div class="container">
-                  <div class="mt-lg-4 mb-lg-1">{%block header %}{%endblock header %}</div>
+                  <div class="mt-4 mb-lg-1">
+                        <div class="text-center mb-4">
+                              <h1>Tarefado</h1>
+                              <p class="text-muted">Suas disciplinas, tarefas e prompts num só lugar</p>
+                        </div>
+                  </div>
                   <div class="container p-2">{% block content %}{% endblock %}</div>
             </div>
             <div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">

@@ -1,0 +1,192 @@
+{% extends 'app/base.html' %} {% block content %}
+<div class="container mt-2">
+      <div class="row g-2">
+            <div class="col-12 mb-4">
+                  <div class="card shadow">
+                        <div class="card-header text-center">
+                              <span class="fs-4">Painel de estudo com ChatGPT</span>
+                        </div>
+                        <div class="card-body p-0">
+                              <ul class="list-group list-group-flush">
+                                    <li class="list-group-item">
+                                          <div class="mb-4 position-relative">
+                                                <h5 class="text-primary">Aprender conceito a fundo</h5>
+                                                <p class="mb-1 prompt-text">
+                                                      Me explica isso como se você estivesse estudando junto comigo para aprender de verdade. Divide o conceito em partes, dá
+                                                      exemplos reais e me mostra os erros comuns.
+                                                </p>
+                                                <button
+                                                      class="btn btn-sm btn-outline-secondary copy-btn position-absolute top-0 end-0 mt-1 me-1"
+                                                      data-bs-toggle="tooltip"
+                                                      title="Copiar prompt"
+                                                >
+                                                      <i class="bi bi-clipboard"></i>
+                                                </button>
+                                          </div>
+
+                                          <div class="mb-4 position-relative">
+                                                <h5 class="text-primary">Explicação com projeto real</h5>
+                                                <p class="mb-1 prompt-text">
+                                                      Finge que nós dois estamos desenvolvendo um projeto e temos que implementar isso. Me explica passo a passo como faríamos, qual
+                                                      seria o código, onde eu posso errar e como testar se está funcionando.
+                                                </p>
+                                                <button
+                                                      class="btn btn-sm btn-outline-secondary copy-btn position-absolute top-0 end-0 mt-1 me-1"
+                                                      data-bs-toggle="tooltip"
+                                                      title="Copiar prompt"
+                                                >
+                                                      <i class="bi bi-clipboard"></i>
+                                                </button>
+                                          </div>
+
+                                          <div class="mb-4 position-relative">
+                                                <h5 class="text-primary">Revisão</h5>
+                                                <p class="mb-1 prompt-text">
+                                                      Atua como meu colega de estudos e me faz perguntas desafiadoras sobre esse conteúdo. Depois me dá o gabarito com explicações e
+                                                      me mostra onde estou fraco.
+                                                </p>
+                                                <button
+                                                      class="btn btn-sm btn-outline-secondary copy-btn position-absolute top-0 end-0 mt-1 me-1"
+                                                      data-bs-toggle="tooltip"
+                                                      title="Copiar prompt"
+                                                >
+                                                      <i class="bi bi-clipboard"></i>
+                                                </button>
+                                          </div>
+
+                                          <div class="mb-4 position-relative">
+                                                <h5 class="text-primary">Roteiro de aprendizado por skill</h5>
+                                                <p class="mb-1 prompt-text">
+                                                      Imagina que somos dois estudantes querendo dominar essa linguagem em poucas semanas. Me passa um plano prático com metas
+                                                      semanais, exemplos, mini-projetos e boas fontes para aprender bem.
+                                                </p>
+                                                <button
+                                                      class="btn btn-sm btn-outline-secondary copy-btn position-absolute top-0 end-0 mt-1 me-1"
+                                                      data-bs-toggle="tooltip"
+                                                      title="Copiar prompt"
+                                                >
+                                                      <i class="bi bi-clipboard"></i>
+                                                </button>
+                                          </div>
+
+                                          <div class="mb-4 position-relative">
+                                                <h5 class="text-primary">Desenvolvimento profissional real</h5>
+                                                <p class="mb-1 prompt-text">
+                                                      Finge que estamos nos preparando para trabalhar remotamente como devs juniors. Quais skills devemos dominar sobre esse
+                                                      assunto? Me dá um roteiro de aprendizado com práticas e situações reais de trabalho.
+                                                </p>
+                                                <button
+                                                      class="btn btn-sm btn-outline-secondary copy-btn position-absolute top-0 end-0 mt-1 me-1"
+                                                      data-bs-toggle="tooltip"
+                                                      title="Copiar prompt"
+                                                >
+                                                      <i class="bi bi-clipboard"></i>
+                                                </button>
+                                          </div>
+
+                                          <div class="mb-4 position-relative">
+                                                <h5 class="text-primary">Escrita técnica universitária</h5>
+                                                <p class="mb-1 prompt-text">
+                                                      Finge que somos estudantes escrevendo um trabalho acadêmico. Me ajuda a escrever um texto técnico sobre esse tema com
+                                                      estrutura, fontes, termos certos e explicações claras.
+                                                </p>
+                                                <button
+                                                      class="btn btn-sm btn-outline-secondary copy-btn position-absolute top-0 end-0 mt-1 me-1"
+                                                      data-bs-toggle="tooltip"
+                                                      title="Copiar prompt"
+                                                >
+                                                      <i class="bi bi-clipboard"></i>
+                                                </button>
+                                          </div>
+
+                                          <div class="mb-4 position-relative">
+                                                <h5 class="text-primary">Checklist técnico completo</h5>
+                                                <p class="mb-1 prompt-text">
+                                                      Finge que somos dois alunos revisando se entendemos tudo sobre esse tema. Cria umchecklist técnico com tudo o que devemos
+                                                      saber, do básico ao avançado, com exemplos de cada ponto.
+                                                </p>
+                                                <button
+                                                      class="btn btn-sm btn-outline-secondary copy-btn position-absolute top-0 end-0 mt-1 me-1"
+                                                      data-bs-toggle="tooltip"
+                                                      title="Copiar prompt"
+                                                >
+                                                      <i class="bi bi-clipboard"></i>
+                                                </button>
+                                          </div>
+
+                                          <div class="mb-4 position-relative">
+                                                <h5 class="text-primary">Simulação de projeto profissional</h5>
+                                                <p class="mb-1 prompt-text">
+                                                      Finge que somos devs remotos iniciando um projeto para um cliente. Como resolveríamos esse problema na prática? Me mostra o
+                                                      fluxo, tecnologias, decisões de arquitetura e testes que faríamos.
+                                                </p>
+                                                <button
+                                                      class="btn btn-sm btn-outline-secondary copy-btn position-absolute top-0 end-0 mt-1 me-1"
+                                                      data-bs-toggle="tooltip"
+                                                      title="Copiar prompt"
+                                                >
+                                                      <i class="bi bi-clipboard"></i>
+                                                </button>
+                                          </div>
+                                    </li>
+                              </ul>
+                        </div>
+                  </div>
+            </div>
+      </div>
+</div>
+
+<script>
+      document.addEventListener("DOMContentLoaded", function () {
+            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+            var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+                  return new bootstrap.Tooltip(tooltipTriggerEl);
+            });
+
+            document.querySelectorAll(".copy-btn").forEach((button) => {
+                  button.addEventListener("click", function () {
+                        const promptText = this.parentElement.querySelector(".prompt-text").textContent;
+
+                        navigator.clipboard
+                              .writeText(promptText.trim())
+                              .then(() => {
+                                    const icon = this.querySelector("i");
+                                    const originalIcon = icon.className;
+                                    const originalTitle = this.getAttribute("title");
+
+                                    icon.className = "bi bi-check2";
+                                    this.setAttribute("title", "Copiado!");
+
+                                    const tooltipInstance = bootstrap.Tooltip.getInstance(this);
+                                    tooltipInstance.show();
+
+                                    setTimeout(() => {
+                                          icon.className = originalIcon;
+                                          this.setAttribute("title", originalTitle);
+                                          tooltipInstance.hide();
+                                    }, 2000);
+                              })
+                              .catch((err) => {
+                                    console.error("Falha ao copiar texto: ", err);
+                                    const textArea = document.createElement("textarea");
+                                    textArea.value = promptText.trim();
+                                    document.body.appendChild(textArea);
+                                    textArea.select();
+                                    try {
+                                          document.execCommand("copy");
+                                          const icon = this.querySelector("i");
+                                          const originalIcon = icon.className;
+                                          icon.className = "bi bi-check2";
+                                          setTimeout(() => {
+                                                icon.className = originalIcon;
+                                          }, 2000);
+                                    } catch (err) {
+                                          console.error("Fallback para copiar falhou: ", err);
+                                    }
+                                    document.body.removeChild(textArea);
+                              });
+                  });
+            });
+      });
+</script>
+{% endblock content %}
