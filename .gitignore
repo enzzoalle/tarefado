@@ -5,6 +5,4 @@ env/
 __pycache__/
 *.pyc
 wp.txt
-tutorial.txt
-documentação.txt
 media/comentarios/arquivos/*
