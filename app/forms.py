@@ -1,4 +1,4 @@
-from .models import Tarefa, Comentario, Materia, TarefaAgenda
+from .models import Tarefa, Comentario, Materia, TarefaAgenda, Prompt
 from django import forms
 
 class MateriaForm(forms.ModelForm):
@@ -50,3 +50,13 @@ class TarefaAgendaForm(forms.ModelForm):
             self.fields['materia'].queryset = Materia.objects.filter(user=user).order_by('titulo')
             self.fields['materia'].required = False
             self.fields['materia'].empty_label = 'Sem matéria vinculada'
+
+class PromptForm(forms.ModelForm):
+    class Meta:
+        model = Prompt
+        fields = ["titulo", "template_key", "conteudo"]
+        widgets = {
+            "titulo": forms.TextInput(attrs={"class": "form-control", "placeholder": "Título"}),
+            "template_key": forms.Select(attrs={"class": "form-select", "id": "templateSelect"}),
+            "conteudo": forms.Textarea(attrs={"class": "form-control", "rows": 6, "placeholder": "Conteúdo do prompt"}),
+        }

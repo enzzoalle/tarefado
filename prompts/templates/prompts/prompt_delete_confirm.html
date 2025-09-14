@@ -1,0 +1,12 @@
+{% extends 'app/base.html' %}
+{% block content %}
+<div class="container mt-3">
+  <h5>Excluir Prompt</h5>
+  <p>Tem certeza que deseja excluir: <strong>{{ prompt.titulo }}</strong> ?</p>
+  <form method="post">
+    {% csrf_token %}
+    <button class="btn btn-danger btn-sm">Confirmar</button>
+    <a href="{% url 'prompts' %}" class="btn btn-secondary btn-sm">Cancelar</a>
+  </form>
+</div>
+{% endblock content %}
